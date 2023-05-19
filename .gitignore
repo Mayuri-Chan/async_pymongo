@@ -1,0 +1,17 @@
+__pycache__/
+
+# Build folder
+dist/
+
+# file
+.DS_Store
+*.pyc
+*.log
+*.session
+*.session-journal
+downloads/
+
+# IDE specific files
+.idea/
+.vscode/
+*.sw*

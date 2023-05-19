@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "async-pymongo"
+version = "0.1.0"
+description = "Asynchronous wrapper for pymongo"
+license = "GPL-3.0-or-later"
+authors = [
+    "Adek Maulana <adekzmaulana@gmail.com>",
+    "Gaung Ramadhan <hi@mrmiss.my.id>",
+    "wulan17 <wulan17@nusantararom.org>"
+]
+readme = "README.md"
+repository = "https://github.com/Mayuri-Chan/async_pymongo"
+keywords = ["async", "python", "pymongo"]
+classifiers = [
+    "Environment :: Console",
+    "Framework :: AsyncIO",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Database",
+]
+
+packages = [{include = "async_pymongo"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pymongo = "^4.3.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
