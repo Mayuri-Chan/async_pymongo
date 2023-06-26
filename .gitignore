@@ -9,7 +9,14 @@ dist/
 *.log
 *.session
 *.session-journal
+build/
 downloads/
+eggs/
+.eggs/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
 # IDE specific files
 .idea/

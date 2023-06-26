@@ -1,5 +1,6 @@
 ## async_pymongo
-Asynchronous wrapper for pymongo
+Asynchronous wrapper for pymongo  
+[Comparison](https://github.com/Mayuri-Chan/async_pymongo/blob/staging/comparison.png)  
 
 ### Installing
 
