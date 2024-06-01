@@ -29,7 +29,7 @@ packages = [{include = "async_pymongo"}]
 
 [tool.poetry.dependencies]
 python = "~=3.9"
-pymongo = ">=4.3.3"
+pymongo = ">=4.3.3 <=5.0.0"
 
 
 [build-system]
