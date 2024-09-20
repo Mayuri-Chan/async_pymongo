@@ -33,7 +33,8 @@ from typing import (
 
 from pymongo.client_session import ClientSession
 from pymongo.collection import Collection
-from pymongo.cursor import _QUERY_OPTIONS, Cursor, RawBatchCursor
+from pymongo.cursor import Cursor, RawBatchCursor
+from pymongo.cursor_shared import _QUERY_OPTIONS
 from pymongo.typings import _Address, _DocumentType
 
 from async_pymongo.async_helper import run_sync
