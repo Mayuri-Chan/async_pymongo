@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "async-pymongo"
-version = "0.1.6"
+version = "0.1.7"
 description = "Asynchronous wrapper for pymongo"
 license = "GPL-3.0-or-later"
 authors = [
@@ -29,7 +29,7 @@ packages = [{include = "async_pymongo"}]
 
 [tool.poetry.dependencies]
 python = "~=3.9"
-pymongo = ">=4.3.3,<=5.0.0"
+pymongo = ">=4.9,<=5.0.0"
 
 
 [build-system]
