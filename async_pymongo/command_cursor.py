@@ -47,8 +47,8 @@ if TYPE_CHECKING:
 
 class CommandCursor(_CommandCursor, Generic[_DocumentType]):
 
-    _CommandCursor__data: Deque[Any]
-    _CommandCursor__killed: bool
+    _data: Deque[Any]
+    _killed: bool
 
     delegate: "AsyncCollection"
 
@@ -75,16 +75,16 @@ class CommandCursor(_CommandCursor, Generic[_DocumentType]):
             explicit_session=explicit_session,
         )
 
-    async def _AsyncCommandCursor__die(self, synchronous: bool = False) -> None:
-        await run_sync(self.__die, synchronous=synchronous)
+    async def _AsyncCommandCursor_die(self, synchronous: bool = False) -> None:
+        await run_sync(self._die, synchronous=synchronous)
 
     @property
-    def _AsyncCommandCursor__data(self) -> Deque[Any]:
-        return self.__data
+    def _AsyncCommandCursor_data(self) -> Deque[Any]:
+        return self._data
 
     @property
     def _AsyncCommandCursor__killed(self) -> bool:
-        return self.__killed
+        return self._killed
 
     @property
     def collection(self) -> "AsyncCollection[_DocumentType]":
@@ -107,10 +107,10 @@ class AsyncCommandCursor(AsyncCursorBase):
         return 0
 
     def _data(self) -> Deque[Any]:
-        return self.dispatch._CommandCursor__data  # skipcq: PYL-W0212
+        return self.dispatch._data  # skipcq: PYL-W0212
 
     def _killed(self) -> bool:
-        return self.dispatch._CommandCursor__killed  # skipcq: PYL-W0212
+        return self.dispatch._killed  # skipcq: PYL-W0212
 
 
 class _LatentCursor(Generic[_DocumentType]):
@@ -118,25 +118,25 @@ class _LatentCursor(Generic[_DocumentType]):
 
     # ClassVar
     alive: ClassVar[bool] = True
-    _CommandCursor__data: ClassVar[Deque[Any]] = deque()
-    _CommandCursor__id: ClassVar[Optional[Any]] = None
-    _CommandCursor__killed: ClassVar[bool] = False
-    _CommandCursor__sock_mgr: ClassVar[Optional[Any]] = None
-    _CommandCursor__session: ClassVar[Optional[AsyncClientSession]] = None
-    _CommandCursor__explicit_session: ClassVar[Optional[bool]] = None
+    _data: ClassVar[Deque[Any]] = deque()
+    _id: ClassVar[Optional[Any]] = None
+    _killed: ClassVar[bool] = False
+    _sock_mgr: ClassVar[Optional[Any]] = None
+    _session: ClassVar[Optional[AsyncClientSession]] = None
+    _explicit_session: ClassVar[Optional[bool]] = None
     address: ClassVar[Optional[Union[Tuple[str, int], _Address]]] = None
     cursor_id: ClassVar[Optional[Any]] = None
     session: Optional[ClientSession] = None
 
-    _CommandCursor__collection: "AsyncCollection"
+    _collection: "AsyncCollection"
 
     def __init__(self, collection: "AsyncCollection") -> None:
-        self._CommandCursor__collection = collection
+        self._collection = collection
 
-    def _CommandCursor__end_session(self, *args: Any, **kwargs: Any) -> None:
+    def _end_session(self, *args: Any, **kwargs: Any) -> None:
         pass  # Only for initialization
 
-    def _CommandCursor__die(self, *args: Any, **kwargs: Any) -> None:
+    def _die(self, *args: Any, **kwargs: Any) -> None:
         pass  # Only for initialization
 
     def _refresh(self) -> int:  # skipcq: PYL-R0201
@@ -150,14 +150,14 @@ class _LatentCursor(Generic[_DocumentType]):
         pass  # Only for initialization
 
     def clone(self) -> "_LatentCursor":
-        return _LatentCursor(self._CommandCursor__collection)
+        return _LatentCursor(self._collection)
 
     def rewind(self):
         pass  # Only for initialization
 
     @property
     def collection(self):
-        return self._CommandCursor__collection
+        return self._collection
 
 
 class AsyncLatentCommandCursor(AsyncCommandCursor):
@@ -214,10 +214,10 @@ class AsyncLatentCommandCursor(AsyncCommandCursor):
             if original_future.done():
                 return
 
-            if self.dispatch._CommandCursor__data or not self.dispatch.alive:  # skipcq: PYL-W0212
+            if self.dispatch._data or not self.dispatch.alive:  # skipcq: PYL-W0212
                 # _get_more is complete.
                 original_future.set_result(
-                    len(self.dispatch._CommandCursor__data)  # skipcq: PYL-W0212
+                    len(self.dispatch._data)  # skipcq: PYL-W0212
                 )
             else:
                 # Send a getMore.

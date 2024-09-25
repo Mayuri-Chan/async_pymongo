@@ -42,9 +42,9 @@ if TYPE_CHECKING:
 
 class Cursor(_Cursor, Generic[_DocumentType]):
 
-    _Cursor__data: Deque[Any]
-    _Cursor__killed: bool
-    _Cursor__query_flags: int
+    _data: Deque[Any]
+    _killed: bool
+    _query_flags: int
 
     delegate: "AsyncCollection[_DocumentType]"
 
@@ -72,43 +72,43 @@ class Cursor(_Cursor, Generic[_DocumentType]):
         raise NotImplementedError
 
     @property
-    def _AsyncCursor__data(self) -> Deque[Any]:
-        return self.__data
+    def _AsyncCursor_data(self) -> Deque[Any]:
+        return self._data
 
-    async def _AsyncCursor__die(self, synchronous: bool = False) -> None:
-        await run_sync(self.__die, synchronous=synchronous)
-
-    @property
-    def _AsyncCursor__exhaust(self) -> bool:
-        return self.__exhaust
+    async def _AsyncCursor_die(self, synchronous: bool = False) -> None:
+        await run_sync(self._die, synchronous=synchronous)
 
     @property
-    def _AsyncCursor__killed(self) -> bool:
-        return self.__killed
+    def _AsyncCursor_exhaust(self) -> bool:
+        return self._exhaust
 
     @property
-    def _AsyncCursor__max_await_time_ms(self) -> Optional[int]:
-        return self.__max_await_time_ms
+    def _AsyncCursor_killed(self) -> bool:
+        return self._killed
 
     @property
-    def _AsyncCursor__max_time_ms(self) -> Optional[int]:
-        return self.__max_time_ms
+    def _AsyncCursor_max_await_time_ms(self) -> Optional[int]:
+        return self._max_await_time_ms
 
     @property
-    def _AsyncCursor__query_flags(self) -> int:
-        return self.__query_flags
+    def _AsyncCursor_max_time_ms(self) -> Optional[int]:
+        return self._max_time_ms
 
     @property
-    def _AsyncCursor__query_spec(self) -> Optional[Any]:
-        return self.__query_spec
+    def _AsyncCursor_query_flags(self) -> int:
+        return self._query_flags
 
     @property
-    def _AsyncCursor__retrieved(self) -> int:
-        return self.__retrieved
+    def _AsyncCursor_query_spec(self) -> Optional[Any]:
+        return self._query_spec
 
     @property
-    def _AsyncCursor__spec(self) -> Mapping[str, Any]:
-        return self.__spec
+    def _AsyncCursor_retrieved(self) -> int:
+        return self._retrieved
+
+    @property
+    def _AsyncCursor_spec(self) -> Mapping[str, Any]:
+        return self._spec
 
     @property
     def collection(self) -> "AsyncCollection[_DocumentType]":
@@ -197,15 +197,15 @@ class AsyncCursor(AsyncCursorBase, Generic[_DocumentType]):
 
     def _query_flags(self) -> int:
         # skipcq: PYL-W0212
-        return self.dispatch._Cursor__query_flags  # type: ignore
+        return self.dispatch._query_flags  # type: ignore
 
     def _data(self) -> Deque[Any]:
         # skipcq: PYL-W0212
-        return self.dispatch._Cursor__data  # type: ignore
+        return self.dispatch._data  # type: ignore
 
     def _killed(self) -> bool:
         # skipcq: PYL-W0212
-        return self.dispatch._Cursor__killed  # type: ignore
+        return self.dispatch._killed  # type: ignore
 
 
 class AsyncRawBatchCursor(AsyncCursor, Generic[_DocumentType]):
