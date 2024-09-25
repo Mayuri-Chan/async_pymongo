@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "async-pymongo"
-version = "0.1.7"
+version = "0.1.8"
 description = "Asynchronous wrapper for pymongo"
 license = "GPL-3.0-or-later"
 authors = [
