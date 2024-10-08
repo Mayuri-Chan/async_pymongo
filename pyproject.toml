@@ -30,6 +30,7 @@ packages = [{include = "async_pymongo"}]
 [tool.poetry.dependencies]
 python = "~=3.9"
 pymongo = ">=4.9,<=5.0.0"
+dnspython = ">=2.6.1"
 
 
 [build-system]
