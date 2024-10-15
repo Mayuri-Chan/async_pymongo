@@ -69,6 +69,9 @@ class AsyncClient(AsyncBaseProperty):
         # Propagate initialization to base
         super().__init__(dispatch)
 
+    def __getattr__(self, name: str) -> AsyncDatabase:
+        return AsyncDatabase(self, self.dispatch[name])
+
     def __getitem__(self, name: str) -> AsyncDatabase:
         return AsyncDatabase(self, self.dispatch[name])
 

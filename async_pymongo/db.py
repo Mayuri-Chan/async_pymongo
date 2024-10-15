@@ -58,6 +58,9 @@ class AsyncDatabase(AsyncBaseProperty):
     def __bool__(self) -> bool:
         return self.dispatch is not None
 
+    def __getattr__(self, name) -> AsyncCollection:
+        return AsyncCollection(self, name)
+
     def __getitem__(self, name) -> AsyncCollection:
         return AsyncCollection(self, name)
 
