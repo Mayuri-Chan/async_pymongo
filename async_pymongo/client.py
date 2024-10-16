@@ -70,7 +70,12 @@ class AsyncClient(AsyncBaseProperty):
         super().__init__(dispatch)
 
     def __getattr__(self, name: str) -> AsyncDatabase:
-        return AsyncDatabase(self, self.dispatch[name])
+        if name.startswith("_"):
+            raise AttributeError(
+                f"{self.__class__.__name__} has no attribute {name!r}. To access the {name}"
+                f" database, use client['{name}']."
+            )
+        return self[name]
 
     def __getitem__(self, name: str) -> AsyncDatabase:
         return AsyncDatabase(self, self.dispatch[name])

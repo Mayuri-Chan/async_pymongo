@@ -102,6 +102,13 @@ class AsyncCollection(AsyncBaseProperty, Generic[_DocumentType]):
     def __bool__(self) -> bool:
         return self.dispatch is not None
 
+    def __getattr__(self, name: str) -> "AsyncCollection":
+        return AsyncCollection(
+            self.database,
+            f"{self.name}.{name}",
+            collection=self.dispatch[name],
+        )
+
     def __getitem__(self, name: str) -> "AsyncCollection":
         return AsyncCollection(
             self.database,
